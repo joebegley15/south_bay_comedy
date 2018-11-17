@@ -14,12 +14,15 @@ class Shows extends Component {
         end: "10:00 PM",
         address: "3039 Meridian Ave #44, San Jose, CA 95124, United States",
         warnings: {
-          clean: false,
-          runslate: false,
-          mixed: false,
-          presignup: true,
-          presignupmand: false,
-          prebooked: false
+          clean: { val: false, message: "Clean show" },
+          runslate: { val: false, message: "Runs late" },
+          mixed: {
+            val: false,
+            message: "Mixed mic. Musicians and poets welcome."
+          },
+          presignup: { val: true, message: "Online signup available" },
+          presignupmand: { val: false, message: "Must sign up in advance" },
+          prebooked: { val: false, message: "Booked in advnce" }
         },
         schedule: "Weekly",
         hosts: ["PX Floro", "Calvin Haha"],
@@ -33,12 +36,15 @@ class Shows extends Component {
         end: "9:00 PM",
         address: "91 S Autumn St, San Jose, CA 95110, USA",
         warnings: {
-          clean: true,
-          runslate: false,
-          mixed: false,
-          presignup: false,
-          presignupmand: false,
-          prebooked: false
+          clean: { val: true, message: "Clean show" },
+          runslate: { val: false, message: "Runs late" },
+          mixed: {
+            val: false,
+            message: "Mixed mic. Musicians and poets welcome."
+          },
+          presignup: { val: false, message: "Online signup available" },
+          presignupmand: { val: false, message: "Must sign up in advance" },
+          prebooked: { val: false, message: "Booked in advnce" }
         },
         schedule: "weekly",
         hosts: [
@@ -81,11 +87,9 @@ class Shows extends Component {
                   {el.start} - {el.end} on {el.day}s ({el.schedule})
                 </div>
                 <div>
-                  {Object.keys(el.warnings).map(warning => {
-                    console.log(el.warnings[warning]);
-                    if (el.warnings[warning]) {
-                      console.log(el.warnings[warning]);
-                      return <div>{warning}</div>;
+                  {Object.keys(el.warnings).map(elWarning => {
+                    if (el.warnings[elWarning].val) {
+                      return <div>{el.warnings[elWarning].message}</div>;
                     }
                   })}
                 </div>
