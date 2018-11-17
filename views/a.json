@@ -1,0 +1,36 @@
+{
+  "title": "Red Rock Coffee",
+  "day": "Monday",
+  "start": "7:00 PM",
+  "end": "9:00 PM",
+  "address": "01 Castro St, Mountain View, CA 94041",
+  "warnings": {
+    "clean": true,
+    "runs-late": false,
+    "mixed-mic": false,
+    "pre-signup": false,
+    "pre-signup-manditory": false,
+    "pre-booked": false
+  },
+  "schedule": "weekly",
+  "hosts": ["Jake Wichman", "Donna Steelma"],
+  "notes":
+    "Popular with musicians. 5 minute expedited set or 10 minute set with long wait. No presigns. Signup at 6 pm, 7 pm showtime."
+}
+
+var requirements = [
+  "title",
+  "day",
+  "start",
+  "end",
+  "address",
+  "warnings"["clean"],
+  "warnings"["runs-late"],
+  "warnings"["mixed-mic"],
+  "warnings"["pre-signup"],
+  "warnings"["pre-signup-manditory"],
+  "warnings"["pre-booked"],
+  "schedule",
+  "hosts",
+  "notes"
+];
