@@ -1,5 +1,5 @@
 import uuid from "uuid";
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from "../actions/types";
+import { GET_SHOWS, ADD_SHOW, DELETE_SHOW } from "../actions/types";
 
 const initialState = {
   shows: [
@@ -57,7 +57,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_ITEMS:
+    case GET_SHOWS:
+      return {
+        ...state
+      };
+    default:
       return {
         ...state
       };
