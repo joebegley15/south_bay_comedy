@@ -7,7 +7,7 @@ class Shows extends Component {
   state = {
     items: [
       {
-        _id: "5bdf5845fb6fc074abb702af",
+        id: uuid(),
         title: "Pizza Factory",
         day: "Sunday",
         start: "8:00 PM",
@@ -29,7 +29,7 @@ class Shows extends Component {
         notes: "Produced and hosted by PX Floro, featuring Calvin Haha."
       },
       {
-        _id: "5bdf58e6fb6fc074abb7030d",
+        id: uuid(),
         title: "Poor House Bistro",
         day: "Monday",
         start: "6:00 PM",
@@ -59,6 +59,7 @@ class Shows extends Component {
     ]
   };
   render() {
+    console.log("rendered");
     const { items } = this.state;
     return (
       <Container>
@@ -77,27 +78,43 @@ class Shows extends Component {
         >
           Add Items
         </Button>
-        <ListGroup className="showList">
-          {items.map(el => {
-            return (
-              <div className="mb-1 ">
-                <h1>{el.title}</h1>
-                <div>Presented by: {el.hosts.join(", ")}</div>
-                <div>
-                  {el.start} - {el.end} on {el.day}s ({el.schedule})
+        <ListGroup>
+          <TransitionGroup className="showList">
+            {items.map(el => {
+              return (
+                <div className="mb-1 ">
+                  <h1>{el.title}</h1>
+                  <div>
+                    Presented by: {el.hosts ? el.hosts.join(", ") : null}
+                  </div>
+                  <div>
+                    {el.start} - {el.end} on {el.day}s ({el.schedule})
+                  </div>
+                  <div>
+                    {Object.keys(el.warnings).map(elWarning => {
+                      if (el.warnings[elWarning].val) {
+                        return <div>{el.warnings[elWarning].message}</div>;
+                      }
+                    })}
+                  </div>
+                  <div>{el.address}</div>
+                  <div>{el.notes}</div>
+                  <Button
+                    className="remove-btn"
+                    color="danger"
+                    size="sm"
+                    onClick={() => {
+                      this.setState(state => ({
+                        items: state.items.filter(item => item.id != el.id)
+                      }));
+                    }}
+                  >
+                    &times;
+                  </Button>
                 </div>
-                <div>
-                  {Object.keys(el.warnings).map(elWarning => {
-                    if (el.warnings[elWarning].val) {
-                      return <div>{el.warnings[elWarning].message}</div>;
-                    }
-                  })}
-                </div>
-                <div>{el.address}</div>
-                <div>{el.notes}</div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </TransitionGroup>
         </ListGroup>
       </Container>
     );
