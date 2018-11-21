@@ -61,6 +61,11 @@ export default function(state = initialState, action) {
       return {
         ...state
       };
+    case DELETE_SHOW:
+      console.log(state.shows.filter(item => item.id != action.payload));
+      return {
+        shows: state.shows.filter(item => item.id != action.payload)
+      };
     default:
       return {
         ...state
