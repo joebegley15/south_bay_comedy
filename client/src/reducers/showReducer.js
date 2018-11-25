@@ -15,7 +15,9 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_SHOWS:
       return {
-        ...state
+        ...state,
+        shows: action.payload,
+        loading: false
       };
     case DELETE_SHOW:
       console.log(state.shows.filter(item => item.id != action.payload));
