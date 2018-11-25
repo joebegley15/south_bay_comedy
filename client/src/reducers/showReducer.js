@@ -1,8 +1,14 @@
 import uuid from "uuid";
-import { GET_SHOWS, ADD_SHOW, DELETE_SHOW } from "../actions/types";
+import {
+  GET_SHOWS,
+  ADD_SHOW,
+  DELETE_SHOW,
+  SHOWS_LOADING
+} from "../actions/types";
 
 const initialState = {
-  shows: []
+  shows: [],
+  loading: false
 };
 
 export default function(state = initialState, action) {
@@ -16,6 +22,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         shows: state.shows.filter(item => item.id != action.payload)
+      };
+    case SHOWS_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return {
